@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXTRAJ.AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>🤖 NEXTRAJ.AI</h2>
+
+<hr>
+
+<h3>Recent Chats</h3>
+
+<div id="history"></div>
+
+<button onclick="newChat()">➕ New Chat</button>
+
+<button>💬 AI Chat</button>
+
+<button onclick="startVoice()">🎤 Voice</button>
+
+<button>📷 Camera</button>
+
+<button>🧠 Memory</button>
+
+<button>⚙ Settings</button>
+
+</div>
+
+<div class="main">
+
+<div class="header">
+
+<h1>NEXTRAJ.AI</h1>
+
+<p>Next Generation AI Assistant</p>
+
+</div>
+
+<div id="chat" class="chatbox">
+
+<div class="ai">
+
+👋 Hello Raj!
+
+<br><br>
+
+How can I help you today?
+
+</div>
+
+</div>
+<div class="bottom">
+
+    <input
+        id="message"
+        type="text"
+        placeholder="Ask anything..."
+        autocomplete="off">
+
+    <input
+        id="imageInput"
+        type="file"
+        accept="image/*"
+        style="display:none;">
+
+    <button
+        class="iconBtn"
+        onclick="document.getElementById('imageInput').click()">
+        📎
+    </button>
+
+    <button
+        class="iconBtn"
+        onclick="startVoice()">
+        🎤
+    </button>
+
+    <button
+        id="sendBtn"
+        onclick="sendMessage()">
+        Send
+    </button>
+
+    <button
+        class="iconBtn"
+        onclick="newChat()">
+        🗑
+    </button>
+
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

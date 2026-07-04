@@ -3,18 +3,23 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>NEXTRAJ.AI</title>
+<title>NEXTRAJ.AI</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 
 <body>
+
+<!-- ========================= -->
+<!-- Sidebar -->
+<!-- ========================= -->
 
 <div class="sidebar">
 
@@ -26,19 +31,35 @@
 
 <div id="history"></div>
 
-<button onclick="newChat()">➕ New Chat</button>
+<button onclick="newChat()">
+➕ New Chat
+</button>
 
-<button>💬 AI Chat</button>
+<button>
+💬 AI Chat
+</button>
 
-<button onclick="startVoice()">🎤 Voice</button>
+<button onclick="startVoice()">
+🎤 Voice Assistant
+</button>
 
-<button>📷 Camera</button>
+<button>
+📷 Camera AI
+</button>
 
-<button>🧠 Memory</button>
+<button>
+🧠 Memory
+</button>
 
-<button>⚙ Settings</button>
+<button>
+⚙ Settings
+</button>
 
 </div>
+
+<!-- ========================= -->
+<!-- Main -->
+<!-- ========================= -->
 
 <div class="main">
 
@@ -46,15 +67,27 @@
 
 <h1>NEXTRAJ.AI</h1>
 
-<p>Next Generation AI Assistant</p>
+<p>
+Next Generation AI Assistant
+</p>
 
 </div>
 
-<div id="chat" class="chatbox">
+<!-- ========================= -->
+<!-- Chat -->
+<!-- ========================= -->
+
+<div
+id="chat"
+class="chatbox">
 
 <div class="ai">
 
 👋 Hello Raj!
+
+<br><br>
+
+I'm <b>NEXTRAJ.AI</b>
 
 <br><br>
 
@@ -63,56 +96,100 @@ How can I help you today?
 </div>
 
 </div>
+<!-- ========================= -->
+<!-- Bottom Input Area -->
+<!-- ========================= -->
+
 <div class="bottom">
 
-    <input
-        id="message"
-        type="text"
-        placeholder="Ask anything..."
-        autocomplete="off">
+<input
+id="message"
+type="text"
+placeholder="Ask anything..."
+autocomplete="off">
 
-    <input
-        id="imageInput"
-        type="file"
-        accept="image/*"
-        style="display:none;">
-        <input
-    type="file"
-    id="pdfInput"
-    accept=".pdf"
-    style="display:none;">
+<!-- Image Upload -->
 
-    <button
-        class="iconBtn"
-        onclick="document.getElementById('imageInput').click()">
-        <button class="iconBtn"
-    onclick="document.getElementById('pdfInput').click()">
-    📄
+<input
+id="imageInput"
+type="file"
+accept="image/*"
+style="display:none;">
+
+<!-- PDF Upload -->
+
+<input
+id="pdfInput"
+type="file"
+accept=".pdf"
+style="display:none;">
+
+<!-- Image Button -->
+
+<button
+class="iconBtn"
+onclick="document.getElementById('imageInput').click()">
+
+📷
+
 </button>
-        📎
-    </button>
 
-    <button
-        class="iconBtn"
-        onclick="startVoice()">
-        🎤
-    </button>
+<!-- PDF Button -->
 
-    <button
-        id="sendBtn"
-        onclick="sendMessage()">
-        Send
-    </button>
+<button
+class="iconBtn"
+onclick="document.getElementById('pdfInput').click()">
 
-    <button
-        class="iconBtn"
-        onclick="newChat()">
-        🗑
-    </button>
+📄
+
+</button>
+
+<!-- Voice Button -->
+
+<button
+class="iconBtn"
+onclick="startVoice()">
+
+🎤
+
+</button>
+
+<!-- Send Button -->
+
+<button
+id="sendBtn"
+onclick="sendMessage()">
+
+Send
+
+</button>
+
+<!-- Talk Button -->
+
+<button
+id="mic-btn"
+class="iconBtn">
+
+🗣 Talk
+
+</button>
+
+<!-- New Chat -->
+
+<button
+class="iconBtn"
+onclick="newChat()">
+
+🗑
+
+</button>
 
 </div>
 
 </div>
+<!-- ========================= -->
+<!-- JavaScript -->
+<!-- ========================= -->
 
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 

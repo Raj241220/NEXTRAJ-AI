@@ -1,5 +1,9 @@
 import os
+import base64
 import markdown
+
+from io import BytesIO
+from PIL import Image
 
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
@@ -25,6 +29,15 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
+# ==========================
+# CAMERA PAGE
+# ==========================
+
+@app.route("/camera")
+def camera():
+    return render_template("camera.html")
 
 
 # ==========================
@@ -86,6 +99,45 @@ def image():
 
 
 # ==========================
+# CAMERA AI
+# ==========================
+
+@app.route("/camera-ai", methods=["POST"])
+def camera_ai():
+
+    try:
+
+        data = request.get_json()
+
+        image_data = data["image"]
+
+        image_data = image_data.split(",")[1]
+
+        image_bytes = base64.b64decode(image_data)
+
+        image = Image.open(BytesIO(image_bytes))
+
+        temp_path = os.path.join(
+            app.config["UPLOAD_FOLDER"],
+            "camera.jpg"
+        )
+
+        image.save(temp_path)
+
+        reply = ask_image(temp_path)
+
+        return jsonify({
+            "reply": reply
+        })
+
+    except Exception as e:
+
+        return jsonify({
+            "reply": f"Camera AI Error: {str(e)}"
+        })
+
+
+# ==========================
 # PDF AI
 # ==========================
 
@@ -109,7 +161,6 @@ def pdf():
 
         text = read_pdf(path)
 
-        # Save PDF in AI Memory
         save_pdf(filename, text)
 
         return jsonify({
@@ -128,6 +179,7 @@ def pdf():
 # ==========================
 
 if __name__ == "__main__":
+
     app.run(
         host="0.0.0.0",
         port=5000,

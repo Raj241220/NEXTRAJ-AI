@@ -1,17 +1,24 @@
 import webbrowser
-import pyautogui
 import time
+
+try:
+    import pyautogui
+    PYAUTOGUI_AVAILABLE = True
+except Exception:
+    PYAUTOGUI_AVAILABLE = False
 
 
 def youtube_search(query):
 
     webbrowser.open("https://www.youtube.com")
 
-    time.sleep(5)
+    if PYAUTOGUI_AVAILABLE:
 
-    pyautogui.write(query)
+        time.sleep(5)
 
-    pyautogui.press("enter")
+        pyautogui.write(query)
+
+        pyautogui.press("enter")
 
     return f"Searching YouTube for '{query}'"
 
@@ -20,10 +27,12 @@ def google_search(query):
 
     webbrowser.open("https://www.google.com")
 
-    time.sleep(4)
+    if PYAUTOGUI_AVAILABLE:
 
-    pyautogui.write(query)
+        time.sleep(4)
 
-    pyautogui.press("enter")
+        pyautogui.write(query)
+
+        pyautogui.press("enter")
 
     return f"Searching Google for '{query}'"

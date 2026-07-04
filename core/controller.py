@@ -2,16 +2,21 @@ import webbrowser
 import subprocess
 import os
 
-from core.automation import youtube_search, google_search
+try:
+    from core.automation import youtube_search, google_search
+    AUTOMATION_AVAILABLE = True
+except Exception:
+    AUTOMATION_AVAILABLE = False
 
 
 def execute_command(command):
 
+    if not AUTOMATION_AVAILABLE:
+        return None
+
     cmd = command.lower().strip()
 
-    # =====================================
-    # Smart Search Commands
-    # =====================================
+    # Smart Search
 
     if "open youtube and search" in cmd:
 
@@ -22,7 +27,6 @@ def execute_command(command):
 
         return "What should I search on YouTube?"
 
-
     if "search google for" in cmd:
 
         query = cmd.replace("search google for", "").strip()
@@ -32,10 +36,7 @@ def execute_command(command):
 
         return "What should I search on Google?"
 
-
-    # =====================================
     # Websites
-    # =====================================
 
     if "youtube" in cmd:
         webbrowser.open("https://www.youtube.com")
@@ -69,10 +70,7 @@ def execute_command(command):
         webbrowser.open("https://linkedin.com")
         return "Opening LinkedIn."
 
-
-    # =====================================
     # Windows Apps
-    # =====================================
 
     elif "notepad" in cmd:
         subprocess.Popen("notepad")
@@ -98,24 +96,13 @@ def execute_command(command):
         subprocess.Popen("taskmgr")
         return "Opening Task Manager."
 
-
-    # =====================================
-    # VS Code
-    # =====================================
-
-    elif "vs code" in cmd or "visual studio code" in cmd:
+    elif "vs code" in cmd:
 
         try:
             subprocess.Popen("code")
             return "Opening VS Code."
-
         except Exception:
             return "VS Code command not found."
-
-
-    # =====================================
-    # Folders
-    # =====================================
 
     elif "downloads" in cmd:
         os.startfile(os.path.expanduser("~/Downloads"))
@@ -140,9 +127,5 @@ def execute_command(command):
     elif "videos" in cmd:
         os.startfile(os.path.expanduser("~/Videos"))
         return "Opening Videos."
-
-    # =====================================
-    # Nothing Found
-    # =====================================
 
     return None

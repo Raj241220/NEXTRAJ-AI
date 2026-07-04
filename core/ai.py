@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from groq import Groq
-
+from core.pdf_memory import get_pdf
 from core.memory import add_message, get_history
 from core.controller import execute_command
 from core.search import web_search
@@ -88,15 +88,26 @@ Rules:
   use them.
 - Otherwise answer using your own knowledge.
 """
-
+    pdf = get_pdf()
     messages = [
+    {
+        "role": "system",
+        "content":
+        f"""
+You are NEXTRAJ.AI.
 
-        {
-            "role": "system",
-            "content": system_prompt
-        }
+You are smart, friendly and helpful.
 
-    ]
+If PDF content is available, ALWAYS answer using the PDF first.
+
+If the answer is not found in the PDF, then use your own knowledge.
+
+PDF Content:
+
+{pdf}
+"""
+    }
+]
 
     # Memory
 

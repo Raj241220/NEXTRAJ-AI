@@ -333,3 +333,89 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+// ===============================
+// PDF Upload
+// ===============================
+
+document.getElementById("pdfInput").addEventListener("change", function () {
+
+    if (this.files.length > 0) {
+
+        sendPDF();
+
+    }
+
+});
+async function sendPDF() {
+
+    const fileInput = document.getElementById("pdfInput");
+
+    if (fileInput.files.length === 0) return;
+
+    const file = fileInput.files[0];
+
+    const chat = document.getElementById("chat");
+
+    chat.innerHTML += `
+        <div class="user">
+            📄 ${file.name}
+        </div>
+    `;
+
+    chat.innerHTML += `
+        <div class="ai" id="typing">
+            🤖 Reading PDF...
+        </div>
+    `;
+
+    chat.scrollTop = chat.scrollHeight;
+
+    const formData = new FormData();
+
+    formData.append("pdf", file);
+
+    try {
+
+        const response = await fetch("/pdf", {
+
+            method: "POST",
+
+            body: formData
+
+        });
+
+        const data = await response.json();
+
+        document.getElementById("typing").remove();
+
+        chat.innerHTML += `
+            <div class="ai">
+                🤖 ${data.reply}
+            </div>
+        `;
+
+        const speech = new SpeechSynthesisUtterance(data.reply);
+
+        speech.lang = "en-US";
+
+        window.speechSynthesis.speak(speech);
+
+    }
+
+    catch (err) {
+
+        document.getElementById("typing").remove();
+
+        chat.innerHTML += `
+            <div class="ai">
+                ❌ PDF processing failed.
+            </div>
+        `;
+
+    }
+
+    chat.scrollTop = chat.scrollHeight;
+
+    fileInput.value = "";
+
+}

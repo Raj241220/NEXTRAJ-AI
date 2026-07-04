@@ -76,10 +76,19 @@ How can I help you today?
         type="file"
         accept="image/*"
         style="display:none;">
+        <input
+    type="file"
+    id="pdfInput"
+    accept=".pdf"
+    style="display:none;">
 
     <button
         class="iconBtn"
         onclick="document.getElementById('imageInput').click()">
+        <button class="iconBtn"
+    onclick="document.getElementById('pdfInput').click()">
+    📄
+</button>
         📎
     </button>
 

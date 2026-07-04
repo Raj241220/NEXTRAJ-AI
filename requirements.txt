@@ -1,0 +1,11 @@
+Flask
+gunicorn
+python-dotenv
+markdown
+requests
+Pillow
+PyMuPDF
+opencv-python
+mediapipe
+google-genai
+groq
